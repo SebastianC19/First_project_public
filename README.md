@@ -1,1 +1,1 @@
-# First_project_public
+# JetBrainsAcademy_practice
