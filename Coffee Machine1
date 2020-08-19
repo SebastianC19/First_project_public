@@ -1,0 +1,87 @@
+# INVENTAIRE
+def state(waterdisp, milkdisp, cbdisp, gobdisp, moneydisp):
+    print("The coffee machine has:\n", waterdisp, " of water\n", milkdisp, " of milk\n", cbdisp, " of coffee beans\n", gobdisp,
+          " of disposable cups\n$", moneydisp, " of money")
+
+# BUY
+def buy(water, milk, cb, gob, money):
+    global waterdisp, milkdisp, cbdisp, gobdisp, moneydisp
+
+    waterdisp -= water
+    milkdisp -= milk
+    cbdisp -= cb
+    gobdisp -= gob
+    moneydisp += money
+
+# FILL
+def refill(fwater, fmilk, fcb, fgob):
+    global waterdisp, milkdisp, cbdisp, gobdisp, moneydisp
+
+    waterdisp += fwater
+    milkdisp += fmilk
+    cbdisp += fcb
+    gobdisp += fgob
+
+# TAKE
+def take():
+    global moneydisp
+    print("I gave you $", moneydisp)
+    moneydisp -= moneydisp
+
+
+# PROGRAMME
+
+waterdisp, milkdisp, cbdisp, gobdisp, moneydisp = 400, 540, 120, 9, 550
+running = True
+while running:
+
+    option = input("Write action (buy, fill, take, remaining, exit): ")
+
+    if option == "buy":
+        coffeetype = input("What do you want to buy? 1 - espresso, 2 - latte, 3 - cappuccino, back: ")
+        if coffeetype == "1":
+            if waterdisp >= 250 and cbdisp >= 16 and gobdisp >= 1:
+                print("Making you a coffee!")
+                buy(250, 0, 16, 1, 4)
+
+            else:
+                print("No espresso today! :(")
+
+        elif coffeetype == "2":
+            if waterdisp >= 350 and milkdisp >= 75 and cbdisp >= 20 and gobdisp >= 1:
+                print("Making you a coffee!")
+                buy(350, 75, 20, 1, 7)
+
+            else:
+                print("No latte today! :(")
+
+        elif coffeetype == "3":
+            if waterdisp >= 200 and milkdisp >= 100 and cbdisp >= 12 and gobdisp >= 1:
+                print("Making you a coffee!")
+                buy(200, 100, 12, 1, 6)
+
+            else:
+                print("No cappuccino today! :(")
+
+        else:
+            continue
+
+
+    elif option == "fill":
+        fwater = int(input("Write how many ml of water do you want to add:"))
+        fmilk = int(input("Write how many ml of milk do you want to add:"))
+        fcb = int(input("Write how many ml of coffee beans do you want to add:"))
+        fgob = int(input("Write how many ml of cups do you want to add:"))
+
+        refill(fwater, fmilk, fcb, fgob)
+        
+
+    elif option == "take":
+        take()
+
+
+    elif option == "remaining":
+        state(waterdisp, milkdisp, cbdisp, gobdisp, moneydisp)
+
+    else:
+        running = False
